@@ -125,6 +125,8 @@ body{
 .proj .ttl-link{text-decoration:none;color:inherit;display:inline-block}
 .proj .ttl{font-family:var(--font-display);font-weight:300;line-height:.95;letter-spacing:-.02em;font-size:clamp(2rem,13vw,22rem);color:#F2F2F2;transition:color .3s,-webkit-text-stroke .3s;will-change:transform;display:inline-block;max-width:100%;overflow-wrap:break-word;word-break:break-word}
 @media(min-width:640px){.proj .ttl{line-height:.85;font-size:clamp(2.5rem,18vw,22rem)}}
+.proj .ttl.ttl-multiline{font-size:clamp(1.8rem,9vw,6rem)}
+@media(min-width:640px){.proj .ttl.ttl-multiline{font-size:clamp(2.2rem,8vw,6.5rem)}}
 .proj .ttl.hollow{color:transparent;-webkit-text-stroke:1.5px var(--p-accent)}
 .proj .sub{margin-top:20px;font-family:var(--font-mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--p-accent)}
 @media(min-width:640px){.proj .sub{margin-top:24px;font-size:14px}}
@@ -538,7 +540,7 @@ PROJECTS.forEach((p,i)=>{
     <div class="idx">${p.index}</div>
     <div class="cluster" data-cluster>
       <div class="skew" data-skew>
-        <h2 class="ttl" data-ttl>${p.title}</h2>
+        <h2 class="ttl${p.title.split(/<br\s*\/?>/i).length>1?' ttl-multiline':''}" data-ttl>${p.title}</h2>
       </div>
       <div class="sub" data-sub>${p.subtitle}</div>
       <div class="enter-group">

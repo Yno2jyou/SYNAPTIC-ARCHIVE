@@ -129,7 +129,9 @@ body{
 @media(min-width:640px){.proj .sub{margin-top:24px;font-size:14px}}
 .proj .desc{margin-top:20px;max-width:28rem;margin-left:auto;margin-right:auto;color:rgba(242,242,242,.5);font-size:14px;line-height:1.6}
 @media(min-width:640px){.proj .desc{font-size:16px}}
-.proj .enter{display:inline-flex;align-items:center;gap:12px;margin-top:32px;padding:12px 24px;border:1px solid var(--p-accent);color:var(--p-accent);font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;transition:all .3s;min-height:44px;cursor:pointer;background:transparent;appearance:none;-webkit-appearance:none}
+.proj .enter-group{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+.proj .enter-group .enter{margin-top:0}
+.proj .enter{display:inline-flex;align-items:center;gap:12px;padding:12px 24px;border:1px solid var(--p-accent);color:var(--p-accent);font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;transition:all .3s;min-height:44px;cursor:pointer;background:transparent;appearance:none;-webkit-appearance:none}
 .proj .enter:hover{background:var(--p-accent);color:#08080A}
 .proj .enter svg{transition:transform .3s}
 .proj .enter:hover svg{transform:translateX(4px)}
@@ -178,6 +180,18 @@ body.viewing .cursor{display:none}
 .warp-grid .scope{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0}
 .warp-grid .scope svg{display:block;animation:spin 24s linear infinite}
 
+/* scan (PRIME) */
+.warp-scan{position:relative;height:100%;overflow:hidden}
+.warp-scan .scanline{position:absolute;left:0;right:0;height:1px;opacity:0;animation:scanmove 3.6s linear infinite}
+.warp-scan .num{position:absolute;font-family:var(--font-mono);font-size:13px;opacity:0;animation:pulse 2.4s ease-in-out infinite}
+/* orbit (Beethoven) */
+.warp-orbit{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+.warp-orbit .oring{position:absolute;border:.5px dashed rgba(242,242,242,.12);border-radius:50%;animation:spin linear infinite}
+.warp-orbit .onote{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:20px;opacity:.8}
+/* type (USOHATUKANAIDE) */
+.warp-type{position:relative;height:100%;overflow:hidden}
+.warp-type .tline{position:absolute;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;white-space:nowrap;opacity:0;animation:flicker 4s ease-in-out infinite}
+
 /* ===== Closing ===== */
 .close{position:relative;min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:96px 24px;text-align:center;overflow:hidden;z-index:2}
 .close .csvg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.15}
@@ -201,6 +215,8 @@ body.viewing .cursor{display:none}
 @keyframes float{0%,100%{transform:translateY(0);opacity:.15}50%{opacity:.6}}
 @keyframes drift{to{transform:translateX(-50%)}}
 @keyframes driftR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes scanmove{0%{top:-5%;opacity:0}10%{opacity:.7}90%{opacity:.7}100%{top:105%;opacity:0}}
+@keyframes flicker{0%,100%{opacity:0}10%,20%{opacity:.7}30%{opacity:.1}50%{opacity:.6}70%{opacity:0}}
 </style>
 </head>
 <body>
@@ -243,7 +259,7 @@ body.viewing .cursor{display:none}
   </div>
   <div class="quad tr">
     <div class="lbl">Dimension</div>
-    <div class="cnt"><span id="cnt">01</span><span class="of">/04</span></div>
+    <div class="cnt"><span id="cnt">01</span><span class="of">/07</span></div>
   </div>
   <div class="quad bl">
     <div class="lbl" style="font-size:9px;margin-bottom:4px">System Time</div>
@@ -320,44 +336,77 @@ body.viewing .cursor{display:none}
 */
 const PROJECTS=[
   {
-    id:"angels",
+    id:"index",
     index:"01",
-    title:"夭折した<br>天使たちへ",
-    subtitle:"To the Angels Gone Too Soon",
-    accent:"#8E9AAF",
-    url:"https://yno2jyou.github.io/to-the-angels-gone-too-soon/#/",
-    theme:"particles",
-    meta:"Lat 35.6762 · Lon 139.6503 · Ethereal Mist"
-  },
-  {
-    id:"factor",
-    index:"02",
-    title:"FACTOR / TRADER",
-    subtitle:"Terminal Matrix",
-    accent:"#00FF41",
-    url:"https://yno2jyou.github.io/FACTOR-TRADER/",
-    theme:"ticker",
-    meta:"Volatility 0.847 · Tick 4.2ms · Terminal Green"
+    title:"27°10′48″N",
+    subtitle:"147°32′24″E · Index",
+    accent:"#6E6E6E",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/27-10-48-N-147-32-24-E/#/"}],
+    theme:"grid",
+    meta:"27°10′48″N · 147°32′24″E · Concrete Neutral"
   },
   {
     id:"speak",
-    index:"03",
+    index:"02",
     title:"Speak or Die",
     subtitle:"Pulse of Letters",
     accent:"#FF3E00",
-    url:"https://yno2jyou.github.io/SorD/#/",
+    links:[
+      {label:"Enter · SorD",url:"https://yno2jyou.github.io/SorD/#/"},
+      {label:"Enter · SoD",url:"https://yno2jyou.github.io/SoD/#/"}
+    ],
     theme:"pulse",
     meta:"Freq 432Hz · Amplitude 0.91 · Signal Flare"
   },
   {
-    id:"index",
+    id:"angels",
+    index:"03",
+    title:"夭折した<br>天使たちへ",
+    subtitle:"To the Angels Gone Too Soon",
+    accent:"#8E9AAF",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/to-the-angels-gone-too-soon/#/"}],
+    theme:"particles",
+    meta:"Lat 35.6762 · Lon 139.6503 · Ethereal Mist"
+  },
+  {
+    id:"prime",
     index:"04",
-    title:"27°10′48″N",
-    subtitle:"147°32′24″E · Index",
-    accent:"#6E6E6E",
-    url:"https://yno2jyou.github.io/27-10-48-N-147-32-24-E/#/",
-    theme:"grid",
-    meta:"27°10′48″N · 147°32′24″E · Concrete Neutral"
+    title:"PRIME",
+    subtitle:"Indivisible Protocol",
+    accent:"#00D9FF",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/PRIME/"}],
+    theme:"scan",
+    meta:"Base 10 · Sieve Depth ∞ · Cyan Lattice"
+  },
+  {
+    id:"factor",
+    index:"05",
+    title:"FACTOR / TRADER",
+    subtitle:"Terminal Matrix",
+    accent:"#00FF41",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/FACTOR-TRADER/"}],
+    theme:"ticker",
+    meta:"Volatility 0.847 · Tick 4.2ms · Terminal Green"
+  },
+  {
+    id:"beethoven",
+    index:"06",
+    title:"Can a Computer<br>Become Beethoven?",
+    subtitle:"A.I. Composition Study",
+    accent:"#E8B84B",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/Can-a-Computer-Become-Beethoven-/"}],
+    theme:"orbit",
+    meta:"Op. ∞ · Tempo Variable · Gold Resonance"
+  },
+  {
+    id:"uso",
+    index:"07",
+    title:"わたしに<br>嘘を<br>つかないで",
+    subtitle:"Don't Lie To Me",
+    accent:"#FF5C8A",
+    links:[{label:"Enter Dimension",url:"https://yno2jyou.github.io/WATASHINIUSOHATUKANAIDE/"}],
+    theme:"type",
+    meta:"Trust Index 0.12 · Pulse Unstable · Rose Flicker"
   }
 ];
 
@@ -434,6 +483,43 @@ function buildWarp(theme,accent){
     scope.style.cssText=`animation:spin 24s linear infinite`;
     scope.innerHTML=`<svg width="180" height="180" viewBox="0 0 180 180" fill="none"><circle cx="90" cy="90" r="85" stroke="${accent}" stroke-width=".5" stroke-dasharray="2 4"/><circle cx="90" cy="90" r="60" stroke="${accent}" stroke-width=".5"/><circle cx="90" cy="90" r="35" stroke="${accent}" stroke-width=".5" stroke-dasharray="1 3"/><line x1="5" y1="90" x2="175" y2="90" stroke="${accent}" stroke-width=".3"/><line x1="90" y1="5" x2="90" y2="175" stroke="${accent}" stroke-width=".3"/></svg>`;
     div.appendChild(scope);
+  }else if(theme==='scan'){
+    for(let i=0;i<5;i++){
+      const ln=document.createElement('div');
+      ln.className='scanline';
+      ln.style.cssText=`background:${accent};animation-delay:${i*0.9}s`;
+      div.appendChild(ln);
+    }
+    for(let i=0;i<24;i++){
+      const n=document.createElement('span');
+      n.className='num';
+      n.textContent=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89][i%24];
+      n.style.cssText=`left:${(i*37)%100}%;top:${(i*53)%100}%;color:${accent};animation-delay:${(i%10)*0.3}s`;
+      div.appendChild(n);
+    }
+  }else if(theme==='orbit'){
+    const notes=['♪','♫','♩','♬'];
+    for(let i=0;i<5;i++){
+      const ring=document.createElement('div');
+      ring.className='oring';
+      const size=30+i*14;
+      ring.style.cssText=`width:${size}vmin;height:${size}vmin;animation-duration:${14+i*6}s;animation-direction:${i%2?'reverse':'normal'}`;
+      const note=document.createElement('span');
+      note.className='onote';
+      note.textContent=notes[i%notes.length];
+      note.style.color=accent;
+      ring.appendChild(note);
+      div.appendChild(ring);
+    }
+  }else if(theme==='type'){
+    const phrases=["you're lying","can i trust you","tell me the truth","just once more","please, stop lying"];
+    for(let i=0;i<10;i++){
+      const s=document.createElement('div');
+      s.className='tline';
+      s.textContent=phrases[i%phrases.length];
+      s.style.cssText=`left:${(i*23)%90}%;top:${(i*31)%90}%;color:${accent};animation-delay:${(i%8)*0.5}s`;
+      div.appendChild(s);
+    }
   }
   return div;
 }
@@ -454,7 +540,9 @@ PROJECTS.forEach((p,i)=>{
         <h2 class="ttl" data-ttl>${p.title}</h2>
       </div>
       <div class="sub" data-sub>${p.subtitle}</div>
-      <button type="button" class="enter" data-enter="${i}"><span>Enter Dimension</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg></button>
+      <div class="enter-group">
+        ${p.links.map((lk,j)=>`<button type="button" class="enter" data-enter="${i}:${j}"><span>${lk.label}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg></button>`).join('')}
+      </div>
     </div>
     <div class="meta">${p.meta}</div>
   `;
@@ -493,14 +581,15 @@ PROJECTS.forEach((p,i)=>{
   const vExt=$('#viewerExt');
   const vExit=$('#viewerExit');
 
-  function openViewer(p){
+  function openViewer(p,link){
     const plainTitle=p.title.replace(/<br\s*\/?>/gi,' ');
+    const lbl=link.label?`${plainTitle} — ${link.label}`:plainTitle;
     vIdx.textContent=p.index;
-    vTtl.textContent=plainTitle;
-    vExt.href=p.url;
+    vTtl.textContent=lbl;
+    vExt.href=link.url;
     document.documentElement.style.setProperty('--v-accent',p.accent);
     loader.classList.remove('hide');
-    frame.src=p.url;
+    frame.src=link.url;
     viewer.classList.add('open');
     viewer.setAttribute('aria-hidden','false');
     document.body.classList.add('viewing');
@@ -520,8 +609,8 @@ PROJECTS.forEach((p,i)=>{
   });
   $$('[data-enter]').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      const i=parseInt(btn.getAttribute('data-enter'),10);
-      openViewer(PROJECTS[i]);
+      const [i,j]=btn.getAttribute('data-enter').split(':').map(n=>parseInt(n,10));
+      openViewer(PROJECTS[i],PROJECTS[i].links[j]);
     });
   });
 })();

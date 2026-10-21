@@ -123,7 +123,8 @@ body{
 .proj .cluster{position:relative;z-index:10;padding:0 16px;text-align:center;will-change:transform}
 .proj .skew{transform-origin:center;will-change:transform}
 .proj .ttl-link{text-decoration:none;color:inherit;display:inline-block}
-.proj .ttl{font-family:var(--font-display);font-weight:300;line-height:.85;letter-spacing:-.02em;font-size:clamp(2.5rem,18vw,22rem);color:#F2F2F2;transition:color .3s,-webkit-text-stroke .3s;will-change:transform;display:inline-block}
+.proj .ttl{font-family:var(--font-display);font-weight:300;line-height:.95;letter-spacing:-.02em;font-size:clamp(2rem,13vw,22rem);color:#F2F2F2;transition:color .3s,-webkit-text-stroke .3s;will-change:transform;display:inline-block;max-width:100%;overflow-wrap:break-word;word-break:break-word}
+@media(min-width:640px){.proj .ttl{line-height:.85;font-size:clamp(2.5rem,18vw,22rem)}}
 .proj .ttl.hollow{color:transparent;-webkit-text-stroke:1.5px var(--p-accent)}
 .proj .sub{margin-top:20px;font-family:var(--font-mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--p-accent)}
 @media(min-width:640px){.proj .sub{margin-top:24px;font-size:14px}}
@@ -135,7 +136,7 @@ body{
 .proj .enter:hover{background:var(--p-accent);color:#08080A}
 .proj .enter svg{transition:transform .3s}
 .proj .enter:hover svg{transform:translateX(4px)}
-.proj .meta{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,242,242,.3);white-space:nowrap;text-align:center;width:90%}
+.proj .meta{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,242,242,.3);white-space:normal;word-break:break-word;text-align:center;width:90%;line-height:1.6}
 
 /* ===== Dimension Viewer (in-site iframe) ===== */
 .viewer{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;background:#08080A;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s ease,visibility .5s ease}
